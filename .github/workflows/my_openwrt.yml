@@ -12,7 +12,7 @@ name: OpenWrt-试验版0.2
 on:
   push:
     branches: 
-      - master
+      - test-master
   # schedule:
   #   - cron: 0 20 * * *
   # release:
