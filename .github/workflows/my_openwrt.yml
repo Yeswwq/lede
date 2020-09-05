@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: OpenWrt-试验版0.2
+name: OpenWrt-试验版0.3
 
 on:
   push:
@@ -27,9 +27,9 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@test-master
         with:
-          ref: master
+          ref: test-master
 
       - name: Space cleanup
         env:
@@ -52,6 +52,7 @@ jobs:
           df -h
       - name: Update feeds
         run: |
+          sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: Generate configuration file
@@ -201,7 +202,7 @@ jobs:
         run: find ./bin/targets/ -type d -name "packages" | xargs rm -rf {}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@test-master
         with:
-          name: OpenWrt_LEDE-X86——Bate0.2
+          name: OpenWrt_LEDE-X86——Bate0.3
           path: ./bin/targets/
